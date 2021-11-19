@@ -1,7 +1,7 @@
 player = game.Players.LocalPlayer
 
 if player.PlayerGui:FindFirstChild("orbLog") then
-    player.PlayerGui.orbLog:Destroy()
+	player.PlayerGui.orbLog:Destroy()
 end
 
 gui = Instance.new("ScreenGui", player.PlayerGui)
@@ -16,12 +16,30 @@ local UIGridLayout = Instance.new("UIGridLayout", ScrollingFrame)
 UIGridLayout.CellSize = UDim2.new(0,50,0,90)
 
 while true do
-    b = 1
-    for i, v in pairs(game.Workspace:GetChildren()) do
-        if v.Name == "Fire" or v.Name == "Water"
-        if v:FindFirstChild("Glow") then
-            h = Instance.new("TextButton", gui)
-            h.BackgroundTransparency = 0
-            h.TextColor3 = Color3.new(color)
-
+	color = nil
+	for i, v in pairs(game.Workspace:GetChildren()) do
+		if v.Name == "Fire" or v.Name == "Water" or v.Name == "Wind" or v.Name == "Nature" or v.Name == "Earth" then
+			color = Color3.fromRGB(255,255,255)
+		elseif v.Name == "Automaton" or v.Name == "Dark" or v.Name == "Electricity" or v.Name == "Light" or v.Name == "Spectrum" then
+			color = Color3.fromRGB(170, 255, 43)
+		elseif v.Name == "Frost" or v.Name == "Lava" or v.Name == "Lunar" or v.Name == "Solar" or v.Name == "Anubis" or v.Name == "Destruction" then
+			color = Color3.fromRGB(255, 113, 11)
+		elseif v.Name == "Acceleration" or v.Name == "Dragon" or v.Name == "Hydra" or v.Name == "Illusion" or v.Name == "Time" or v.Name == "Valkyrie" then
+			color = Color3.fromRGB(255,0,0)
+		end
+		if v:FindFirstChild("Glow") then
+			h = Instance.new("TextButton", gui)
+			h.BackgroundTransparency = 0
+			h.TextColor3 = color
+			h.Text = v.Name
+			h.Name = v.Name
+		end
+		
+		--gui.ScrollingFrame:FindFirstChild("Orb"..b).MouseButton1Click:connect(function()
+			--player.Character.HumanoidRootPart:MoveTo(v.Position)
+		--end)
+		
+	end
+	wait(1)
+end
 
