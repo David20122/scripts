@@ -1,0 +1,57 @@
+print("by David (--#7725)")
+player = game.Players.LocalPlayer
+if player.PlayerGui:FindFirstChild("orblist") then
+player.PlayerGui.orblist:Destroy()
+end
+g = Instance.new("ScreenGui")
+g.Parent = player.PlayerGui
+g.Name = "orblist"
+while true do
+b = 1
+for i, v in pairs(game.Workspace:GetChildren()) do
+if v:FindFirstChild("Glow") then
+h = Instance.new("TextButton")
+h.Parent = g
+h.Size = UDim2.new(0.2, 0,0.1, 0)
+h.Text = v.Name
+h.Name = "Orb"..b
+if v.Name == "Fire" or v.Name == "Water" or v.Name == "Wind" or v.Name == "Nature" or v.Name == "Earth" then
+u = 0
+end
+if v.Name == "Automaton" or v.Name == "Dark" or v.Name == "Electricity" or v.Name == "Light" or v.Name == "Spectrum" then
+u = 1
+end
+if v.Name == "Frost" or v.Name == "Lava" or v.Name == "Lunar" or v.Name == "Solar" or v.Name == "Anubis" or v.Name == "Destruction" then
+print("Legendary Orb Spawned")
+u = 2
+end
+if v.Name == "Acceleration" or v.Name == "Dragon" or v.Name == "Hydra" or v.Name == "Illusion" or v.Name == "Time" or v.Name == "Valkyrie" then
+print("Mythical Orb Spawned")
+u = 3
+end
+h.TextColor3 = Color3.new(0,0,0)
+h.TextScaled = true
+h.BackgroundColor3 = Color3.new(220,220,220)
+if u == 1 then
+h.BackgroundColor3 = Color3.new(0,255,0)
+end
+if u == 2 then
+h.BackgroundColor3 = Color3.new(255,255,0)
+end
+if u == 3 then
+h.BackgroundColor3 = Color3.new(128,0,128)
+end
+h.Position = UDim2.new(0, 0,0.1*b, 0)
+g:FindFirstChild("Orb"..b).MouseButton1Click:connect(function()
+v:MoveTo(player.Character.Head.Position)
+end)
+b = b + 1
+end
+end
+wait(1)
+for i, v in pairs(g:GetChildren()) do
+if v then
+v:Destroy()
+end
+end
+end
