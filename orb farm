@@ -1,45 +1,106 @@
+stopAtFirstMyth = true
+overnightMythFarm = true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 player = game.Players.LocalPlayer
 
 if player.PlayerGui:FindFirstChild("orbLog") then
 	player.PlayerGui.orbLog:Destroy()
 end
 
-gui = Instance.new("ScreenGui", player.PlayerGui)
+gui = Instance.new("ScreenGui", game.CoreGui)
 gui.Name = "orbLog"
 
 local ScrollingFrame = Instance.new("ScrollingFrame", gui)
 ScrollingFrame.BackgroundColor3 = Color3.new(0.15, 0.15, 0.15)
 ScrollingFrame.Position = UDim2.new(0.08, 0, 0.42, 0)
-ScrollingFrame.Size = UDim2.new(0, 296, 0, 388)
+ScrollingFrame.Size = UDim2.new(0, 100, 0, 150)
 
 local UIGridLayout = Instance.new("UIGridLayout", ScrollingFrame)
-UIGridLayout.CellSize = UDim2.new(0,50,0,90)
+UIGridLayout.CellSize = UDim2.new(0,100,0,10)
 
+h = Instance.new("TextLabel", ScrollingFrame)
+h.BackgroundColor3 = Color3.new(0.2,0.2,0.2)
+h.BackgroundTransparency = 0
+h.TextColor3 = Color3.fromRGB(255, 170, 255)
+h.Text = "-- Orb Log --"
+h.Name = " "
+
+b = 0
+stop = false
 while true do
 	color = nil
 	for i, v in pairs(game.Workspace:GetChildren()) do
-		if v.Name == "Fire" or v.Name == "Water" or v.Name == "Wind" or v.Name == "Nature" or v.Name == "Earth" then
-			color = Color3.fromRGB(255,255,255)
-		elseif v.Name == "Automaton" or v.Name == "Dark" or v.Name == "Electricity" or v.Name == "Light" or v.Name == "Spectrum" then
-			color = Color3.fromRGB(170, 255, 43)
-		elseif v.Name == "Frost" or v.Name == "Lava" or v.Name == "Lunar" or v.Name == "Solar" or v.Name == "Anubis" or v.Name == "Destruction" then
-			color = Color3.fromRGB(255, 113, 11)
-		elseif v.Name == "Acceleration" or v.Name == "Dragon" or v.Name == "Hydra" or v.Name == "Illusion" or v.Name == "Time" or v.Name == "Valkyrie" then
-			color = Color3.fromRGB(255,0,0)
-		end
 		if v:FindFirstChild("Glow") then
-			h = Instance.new("TextButton", gui)
-			h.BackgroundTransparency = 0
-			h.TextColor3 = color
-			h.Text = v.Name
-			h.Name = v.Name
-		end
-		
-		--gui.ScrollingFrame:FindFirstChild("Orb"..b).MouseButton1Click:connect(function()
-			--player.Character.HumanoidRootPart:MoveTo(v.Position)
-		--end)
-		
-	end
-	wait(1)
-end
+			if v.Name == "Fire" or v.Name == "Water" or v.Name == "Wind" or v.Name == "Nature" or v.Name == "Earth" then
+				color = Color3.fromRGB(255,255,255)
+				b = b + 1
+				if overnightMythFarm == true and stop == false then
+					v:MoveTo(player.Character.Head.Position)
+					if stopAtFirstMyth == true then
+						stop = true
+					end
+				end
+			elseif v.Name == "Automaton" or v.Name == "Dark" or v.Name == "Electricity" or v.Name == "Light" or v.Name == "Spectrum" then
+				color = Color3.fromRGB(170, 255, 43)
+				b = b + 1
 
+			elseif v.Name == "Frost" or v.Name == "Lava" or v.Name == "Lunar" or v.Name == "Solar" or v.Name == "Anubis" or v.Name == "Destruction" then
+				color = Color3.fromRGB(255, 113, 11)
+				b = b + 1
+
+			elseif v.Name == "Acceleration" or v.Name == "Dragon" or v.Name == "Hydra" or v.Name == "Illusion" or v.Name == "Time" or v.Name == "Valkyrie" then
+				color = Color3.fromRGB(255,0,0)
+				b = b + 1
+				if overnightMythFarm == true and stop == false then
+					v:MoveTo(player.Character.Head.Position)
+					if stopAtFirstMyth == true then
+						stop = true
+					end
+				end
+			end
+
+			orb = Instance.new("TextButton", ScrollingFrame)
+			orb.BackgroundTransparency = 1
+			orb.TextColor3 = color
+			orb.Text = v.Name
+			orb.Name = "Orb"..b
+			v.Name = "Orb"..b
+
+		end
+	end
+
+	wait(10)
+
+	h = Instance.new("TextLabel", ScrollingFrame)
+	h.BackgroundColor3 = Color3.new(0.2,0.2,0.2)
+	h.BackgroundTransparency = 1
+	h.TextColor3 = Color3.fromRGB(255, 170, 255)
+	h.Text = "----------"
+	h.Name = " "
+
+	repeat 
+		wait(0.1)
+		for i, v in pairs(ScrollingFrame:GetChildren()) do
+			if v:IsA("TextButton") then
+				v.MouseButton1Click:Connect(function()
+					local orbName = v.Name
+					player.Character.HumanoidRootPart.CFrame = game.Workspace[orbName].Glow.CFrame
+				end)
+			end
+		end
+	until player.PlayerGui.TimeGui.TextLabel.Text == "Orbs have spawned!"
+end
