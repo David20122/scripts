@@ -1,3 +1,4 @@
+
 player = game.Players.LocalPlayer
 
 if player.PlayerGui:FindFirstChild("orbLog") then
