@@ -13,10 +13,15 @@ ScrollingFrame.Position = UDim2.new(0.08, 0, 0.42, 0)
 ScrollingFrame.Size = UDim2.new(0, 296, 0, 388)
 
 local UIGridLayout = Instance.new("UIGridLayout", ScrollingFrame)
-UIGridLayout.CellSize = UDim2.new(0,90,0,90)
+UIGridLayout.CellSize = UDim2.new(0,50,0,90)
 
-
-
-
+while true do
+    b = 1
+    for i, v in pairs(game.Workspace:GetChildren()) do
+        if v.Name == "Fire" or v.Name == "Water"
+        if v:FindFirstChild("Glow") then
+            h = Instance.new("TextButton", gui)
+            h.BackgroundTransparency = 0
+            h.TextColor3 = Color3.new(color)
 
 
