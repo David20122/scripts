@@ -1,4 +1,3 @@
-
 player = game.Players.LocalPlayer
 
 if player.PlayerGui:FindFirstChild("orbLog") then
@@ -32,12 +31,6 @@ while true do
 			if v.Name == "Fire" or v.Name == "Water" or v.Name == "Wind" or v.Name == "Nature" or v.Name == "Earth" then
 				color = Color3.fromRGB(255,255,255)
 				b = b + 1
-				if _G.overnightMythFarm == true and stop == false then
-					v:MoveTo(player.Character.Head.Position)
-					if _G.stopAtFirstMyth == true then
-						stop = true
-					end
-				end
 			elseif v.Name == "Automaton" or v.Name == "Dark" or v.Name == "Electricity" or v.Name == "Light" or v.Name == "Spectrum" then
 				color = Color3.fromRGB(170, 255, 43)
 				b = b + 1
@@ -81,4 +74,3 @@ while true do
 		end
 	until player.PlayerGui.TimeGui.TextLabel.Text == "Orbs have spawned!"
 end
-
