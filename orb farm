@@ -50,13 +50,14 @@ while true do
 				end
 			end
 
-			orb = Instance.new("TextButton", ScrollingFrame)
-			orb.BackgroundTransparency = 1
-			orb.TextColor3 = color
-			orb.Text = v.Name
-			orb.Name = "Orb"..b
-			v.Name = "Orb"..b
-
+			if v.Name ~= "Orb"..b then
+				orb = Instance.new("TextButton", ScrollingFrame)
+				orb.BackgroundTransparency = 1
+				orb.TextColor3 = color
+				orb.Text = v.Name
+				orb.Name = "Orb"..b
+				v.Name = "Orb"..b
+			end
 		end
 	end
 
